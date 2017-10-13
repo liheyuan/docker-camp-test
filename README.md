@@ -9,6 +9,7 @@
 # after reboot vm
 ./start_nodes.sh
 ./init_swarm.sh
+./create_dns.sh
 
 # stop 
 ./stop_nodes.sh
