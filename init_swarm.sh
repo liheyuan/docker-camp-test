@@ -4,6 +4,8 @@
 for i in 1 2 3;do
     eval $(docker-machine env node-$i)
     docker swarm leave --force
+    docker network rm macvlan
+    docker network rm mv-config
 done
 
 # Const
@@ -46,7 +48,6 @@ for i in 1 2 3;do
     IP_RANGE=${IP_RANGES[$i]}
     docker-machine ssh node-$i "sudo ip link set dev $ETH promisc on"
     eval $(docker-machine env node-$i)
-    docker network rm mv-config
     docker network create --config-only --subnet $SUBNET_RANGE --gateway $GATEWAY -o parent=eth1 --ip-range $IP_RANGE mv-config
 done
 
@@ -56,4 +57,5 @@ docker network create -d macvlan --scope swarm --config-from mv-config macvlan
 
 # overlay network
 eval $(docker-machine env $SWARM_MANAGER_NODE)
+docker network remove camp
 docker network create --driver overlay camp 
