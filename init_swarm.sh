@@ -48,6 +48,7 @@ for i in 1 2 3;do
     IP_RANGE=${IP_RANGES[$i]}
     docker-machine ssh node-$i "sudo ip link set dev $ETH promisc on"
     eval $(docker-machine env node-$i)
+    docker network rm mv-config
     docker network create --config-only --subnet $SUBNET_RANGE --gateway $GATEWAY -o parent=eth1 --ip-range $IP_RANGE mv-config
 done
 
