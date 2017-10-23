@@ -3,7 +3,7 @@
 ## Build swarm env 
 ```
 # first time
-./create_nodes.sh
+./mk_nodes.sh
 ./init_swarm.sh
 ./create_swarmdict.sh
 ./create_dns.sh

@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# submit to swarm master node
-dns_ip=$(docker-machine ip node-1)
-eval $(docker-machine env node-1)
+# submit to tool node
+NODE="node-1"
+NODE_DNS="node-10"
+dns_ip=$(docker-machine ip $NODE_DNS)
+eval $(docker-machine env $NODE)
 docker service create \
     --dns $dns_ip \
     --network macvlan --network camp \
