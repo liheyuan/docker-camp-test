@@ -8,3 +8,6 @@ for i in 1 2 3; do
     --virtualbox-hostonly-nicpromisc allow-all \
     node-$i
 done
+
+# copy certs to node-1
+./scp_machine_certs.sh
